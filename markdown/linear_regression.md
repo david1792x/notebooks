@@ -19,7 +19,7 @@ plt.show()
 
 
     
-![png](output_2_0.png)
+![png](/images/lr_1.png)
     
 
 
@@ -46,7 +46,7 @@ plt.show()
 
 
     
-![png](output_6_0.png)
+![png](/images/lr_2.png)
     
 
 
@@ -83,7 +83,7 @@ plt.show()
 
 
     
-![png](output_10_0.png)
+![png](/images/lr_3.png)
     
 
 
@@ -110,7 +110,7 @@ print(f'SSR for y = 0.4x: {SSR(y, yi):.2f}')
 
 
     
-![png](output_14_0.png)
+![png](/images/lr_4.png)
     
 
 
@@ -134,7 +134,7 @@ plt.show()
 
 
     
-![png](output_16_0.png)
+![png](/images/lr_5.png)
     
 
 
@@ -172,7 +172,7 @@ print(f'SSR for y = 0.9770x: {SSR(y, yi):.2f}')
 
 
     
-![png](output_19_0.png)
+![png](/images/lr_6.png)
     
 
 
@@ -194,7 +194,7 @@ plt.show()
 
 
     
-![png](output_21_0.png)
+![png](/images/lr_7.png)
     
 
 
@@ -211,7 +211,7 @@ print(f'SSR for y = x̄: {SSR(y, yi):.2f}')
 
 
     
-![png](output_23_0.png)
+![png](/images/lr_8.png)
     
 
 
@@ -241,7 +241,7 @@ plt.show()
 
 
     
-![png](output_25_0.png)
+![png](/images/lr_9.png)
     
 
 
@@ -300,7 +300,7 @@ print(f'SSR for y = 2.32x + 3.24: {SSR(y, yi):.2f}')
 
 
     
-![png](output_31_0.png)
+![png](/images/lr_10.png)
     
 
 
@@ -338,19 +338,6 @@ df.head()
 
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -425,7 +412,7 @@ print(f'Correlation values of features with the target:\n{df.corr().iloc[:3,3]}'
 
 
     
-![png](output_38_0.png)
+![png](/images/lr_11.png)
     
 
 
@@ -457,7 +444,7 @@ ax2.view_init(elev=4, azim=114)
 
 
     
-![png](output_40_0.png)
+![png](/images/lr_12.png)
     
 
 
@@ -507,7 +494,7 @@ ax2.view_init(elev=4, azim=114)
 
 
     
-![png](output_44_0.png)
+![png](/images/lr_13.png)
     
 
 
@@ -555,7 +542,7 @@ print(f'Correlation value between independent variables: {np.corrcoef(X.T)[0, 1]
 
 
     
-![png](output_49_0.png)
+![png](/images/lr_14.png)
     
 
 
@@ -660,7 +647,7 @@ print(f'Sum of squares around the mean: {ssrm:.4f}\nSum of squares around the fi
 
 
     
-![png](output_59_0.png)
+![png](/images/lr_15.png)
     
 
 
