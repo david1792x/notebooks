@@ -210,7 +210,7 @@ print(f'Precision: {pr:.4f}\nRecall: {re:.4f}\nF1 score: {f1:.4f}')
 
 
     
-![png](output_23_0.png)
+![png](/images/pm_1.png)
     
 
 
@@ -257,7 +257,7 @@ plt.show()
 
 
     
-![png](output_27_0.png)
+![png](/images/pm_2.png)
     
 
 
