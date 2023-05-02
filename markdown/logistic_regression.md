@@ -1,6 +1,8 @@
-## **Logistic Regression**
+# **Logistic Regression**
 
-Logistic Regression is a model that returns the probability of a certain discrete outcome based on input variables. Just in the way linear regression tries to fit a line to data, logistic regression tries to fit a 'squiggle' or logistic function to discrete data. The logistic function tells us the probability that a certain outcome (often binary) has, based on input variables. We often use these probabilities for classification problems by setting a decision boundary that classifies our data based on the probabilities. The logistic function maps all real values into the range from 0 to 1 in the y-axis, and the equation is the following: $$ $$ Let's see a small dataset that would be a great candidate for logistic regression.
+Logistic Regression is a model that returns the probability of a certain discrete outcome based on input variables. Just in the way linear regression tries to fit a line to data, logistic regression tries to fit a 'squiggle' or logistic function to discrete data. The logistic function tells us the probability that a certain outcome (often binary) has, based on input variables. We often use these probabilities for classification problems by setting a decision boundary that classifies our data based on the probabilities. The logistic function maps all real values into the range from 0 to 1 in the y-axis, and its equation is: 
+$$\phi(z) = \frac{1}{1 + e^{-z}} $$  
+where $z$ is a linear function. Let's see a small dataset that would be a great candidate for logistic regression.
 
 
 ```python
@@ -21,11 +23,14 @@ plt.show()
 
 
     
-![png](output_2_0.png)
+![png](/images/log_1.png)
     
 
 
-In this example dataset, we are trying to model our discrete variable (binary) as a function of an input variable, continious in this case. Just by looking at the data, we can see that, although the data has some exceptions, if the independent variable is lower than 5, it is most likely to be in class 0, and if the variable is higher than 5, it is most likely to be in class 1. Further on, we will estimate the parameters that fit the sigmoid to the data, for now, the parameters have already been estimated and we can see how the sigmoid fits to the data. The equation for the logistic function is defined as: $$ p(X) = \frac{1}{1 + e^{-\beta X}} $$ where $p(X)$ is the probability (dependent variable), $\beta$ is our parameter vector, and $X$ is our dependent variable vector or design matrix, similar to how a linear regression line is expressed. Let's see how this looks when applied to our dataset.
+In this example dataset, we are trying to model our discrete variable (binary) as a function of an input variable, continious in this case. Just by looking at the data, we can see that, although the data has some exceptions, if the independent variable is lower than 5, it is most likely to be in class 0, and if the variable is higher than 5, it is most likely to be in class 1. Further on, we will estimate the parameters that fit the sigmoid to the data, for now, the parameters have already been estimated and we can see how the sigmoid fits to the data. The equation for the logistic function is defined as: 
+$$p(X) = \frac{1}{1 + e^{-\beta X}}$$ 
+
+where $p(X)$ is the probability (dependent variable), $\beta$ is our parameter vector, and $X$ is our dependent variable vector or design matrix, similar to how a linear regression line is expressed. Let's see how this looks when applied to our dataset.
 
 
 ```python
@@ -41,7 +46,7 @@ plt.show()
 
 
     
-![png](output_4_0.png)
+![png](/images/log_2.png)
     
 
 
@@ -61,11 +66,16 @@ print(f'Predicted classes: {pred}\nActual classes: {y}')
 
 We can notice that there are only a few samples where the classification was incorrect, mainly when p(x) was near 0.5. For the dataset above, we took the parameter vector $\beta$ as given, now we will see where this parameter vector comes from and how logistic regression can transform into a linear model.
 
-To start off, we define the 'logit' function. The logit function is a way of expressing probabilities as odds, or $log$(odds) to be more precise. Probabilities are expressed as the ratio of an event ocurring to the total number of events. We use counts as a way to express events, so, if we have a count of 3 times the event happened out of 6 total events, we would have a probability of $\frac{3}{6}$, or 0.5. Odds are expressed as the ratio of an event ocurring to the event not ocurring. So in the example above, the event happened 3 times and didn't happen 3 times, so the odds would be $\frac{3}{3}$ or 1 (commonly expressed as 1 to 1 odds, as in how many times the event should happen for every time the event does not happen). we can express the odds in terms of probability with the equation: $$ odds(p) = \frac{p}{1 - p}$$ where $p$ is the probability of an event happening. If we analyze the range of our functions, we will quickly notice that $p \in [0, 1]$. If the p is really close to 0 (not very likely to happen), then $\frac{p}{1 - p}$ would approximate to 0, but on the other hand, if p is really close to 1, $\frac{p}{1 - p}$ would aproximate $\infty$, so the range of our odds function would be $odds(p) \in [0, \infty)$. It would be nice if we could make this range go from $- \infty$ to $\infty$ so that it has the same range as any other linear function, and it would also be nice if we could do it in a way that clearly expresses the quantification of the opposite odds, so that odds that are 3 to 1 can be easily distinguished as being the opposite of 1 to 3, since odds of 3 and 0.33 are not numerically correlated without the equation that describes them.
+To start off, we define the 'logit' function. The logit function is a way of expressing probabilities as odds, or $log$(odds) to be more precise. Probabilities are expressed as the ratio of an event ocurring to the total number of events. We use counts as a way to express events, so, if we have a count of 3 times the event happened out of 6 total events, we would have a probability of $\frac{3}{6}$, or 0.5. Odds are expressed as the ratio of an event ocurring to the event not ocurring. So in the example above, the event happened 3 times and didn't happen 3 times, so the odds would be $\frac{3}{3}$ or 1 (commonly expressed as 1 to 1 odds, as in how many times the event should happen for every time the event does not happen). we can express the odds in terms of probability with the equation: 
+$$odds(p) = \frac{p}{1 - p}$$
 
-The solution? Take the natural logarithm of the odds, as simple as that. The log of the odds would give us the range that we want, and make our relationships linear, simplifying the visualizations and giving us a path to finding the linear coefficients that give us the best fitting squiggle. Taking the log of the odds in term of the probabilities is the logit function that we talked about, and it is expressed as: $$ logit(p) = log(\frac{p}{1-p})$$
+where $p$ is the probability of an event happening. If we analyze the range of our functions, we will quickly notice that $p \in \[0, 1]$. If the p is really close to 0 (not very likely to happen), then $\frac{p}{1 - p}$ would approximate to 0, but on the other hand, if p is really close to 1, $\frac{p}{1 - p}$ would aproximate $\infty$, so the range of our odds function would be $odds(p) \in \[0, \infty)$. It would be nice if we could make this range go from $-\infty$ to $\infty$ so that it has the same range as any other linear function, and it would also be nice if we could do it in a way that clearly expresses the quantification of the opposite odds, so that odds that are 3 to 1 can be easily distinguished as being the opposite of 1 to 3, since odds of 3 and 0.33 are not numerically correlated without the equation that describes them.
 
-Knowing that for our logistic function $ p(X) = \frac{1}{1 + e^{-\beta X}} $, the logit of p would be: $$ logit(p) = log(\frac{\frac{1}{1 + e^{-\beta X}}}{1 - \frac{1}{1 + e^{-\beta X}}} )$$
+The solution? Take the natural logarithm of the odds, as simple as that. The log of the odds would give us the range that we want, and make our relationships linear, simplifying the visualizations and giving us a path to finding the linear coefficients that give us the best fitting squiggle. Taking the log of the odds in term of the probabilities is the logit function that we talked about, and it is expressed as: 
+$$logit(p) = log(\frac{p}{1-p})$$
+
+Knowing that for our logistic function $p(X) = \frac{1}{1 + e^{-\beta X}}$, the logit of p would be: 
+$$logit(p) = log(\frac{\frac{1}{1 + e^{-\beta X}}}{1 - \frac{1}{1 + e^{-\beta X}}})$$
 $$logit(p) = log(\frac{1}{1 + e^{-\beta X}}) - log(1 - \frac{1}{1 + e^{-\beta X}})$$ 
 $$logit(p) = log(\frac{1}{1 + e^{-\beta X}}) - log(\frac{1 + e^{-\beta X}-1}{1 + e^{-\beta X}})$$ 
 $$logit(p) = log(1) - log(1 + e^{-\beta X}) - log(e^{-\beta X}) + log(1 + e^{-\beta X})$$ 
@@ -73,55 +83,64 @@ $$logit(p) = log(1) - log(e^{-\beta X})$$
 $$logit(p) = 0 - (-\beta X)$$
 $$logit(p) = \beta X$$  
 
-Logistic regression focuses on finding the parameter vector $\beta$ with Maximum Likelihood Estimation (MLE). MLE considers a label vector $y$ of size n, which is the number of samples in the data. Each element can be either a 0 or a 1, so that they either belong to class 1 or not. For samples that are labeled as 1, MLE estimates $\beta$ so that the product of the probabilities in the vector $p(X)$ is as close to 1 as possible, and for sampled that are labeled as 0, estimates $\beta$ so that 1 - $p(X)$ is as close to 1 as possible. The equation that describes the likelihood is: $\prod_{i = 1}^n p(x_i)$ where $y_i = 1$ and $\prod_{i = 1}^n 1-p(x_i)$ when $y_i = 0$. We can combine these equations as: 
-$$L(\beta) = \prod_{i = 1}^n p(x_i) \times \prod_{i = 1}^n 1-p(x_i) $$
-$$L(\beta) = \prod_{i = 1}^n p(x_i)^{y_i} (1-p(x_i))^{1-y_i} $$
+Logistic regression focuses on finding the parameter vector $\beta$ with Maximum Likelihood Estimation (MLE). MLE considers a label vector $y$ of size n, which is the number of samples in the data. Each element can be either a 0 or a 1, so that they either belong to class 1 or not. For samples that are labeled as 1, MLE estimates $\beta$ so that the product of the probabilities in the vector $p(X)$ is as close to 1 as possible, and for sampled that are labeled as 0, estimates $\beta$ so that 1 - $p(X)$ is as close to 1 as possible. The equation that describes the likelihood is: 
+$$\prod_{i = 1}^n p(x_i)$$
+
+when $y_i = 1$ and 
+$$\prod_{i = 1}^n 1-p(x_i)$$
+
+when $y_i = 0$. We can combine these equations as: 
+$$L(\beta) = \prod_{i = 1}^n p(x_i) \cdot \prod_{i = 1}^n 1-p(x_i)$$
+$$L(\beta) = \prod_{i = 1}^n p(x_i)^{y_i} (1-p(x_i))^{1-y_i}$$
 
 The equation above is congruent with the probability mass function of a Bernoulli distribution on $p(x_i)$. We can now obtain the log-likelihoood function by taking the log on both sides, simplifying the exponents and turning the products into summations as following:
-$$ log(L(\beta)) = \prod_{i = 1}^n log(p(x_i)^{y_i} (1-p(x_i))^{1-y_i}) $$
-$$ l(\beta) = \sum_{i = 1}^n log(p(x_i)^{y_i}) + log((1-p(x_i))^{1-y_i}  $$
-$$ l(\beta) = \sum_{i = 1}^n y_i log(p(x_i)) + (1-y_i)log(1-p(x_i))  $$
+$$log(L(\beta)) = \prod_{i = 1}^n log(p(x_i)^{y_i} (1-p(x_i))^{1-y_i})$$
+$$l(\beta) = \sum_{i = 1}^n log(p(x_i)^{y_i}) + log((1-p(x_i))^{1-y_i}$$
+$$l(\beta) = \sum_{i = 1}^n y_i log(p(x_i)) + (1-y_i)log(1-p(x_i))$$
 
 Substituting the logistic function for $p(x_i)$ we get:
-$$ l(\beta) = \sum_{i = 1}^n y_i log(\frac{1}{1 + e^{-\beta x_i}}) + (1-y_i)log(1-\frac{1}{1 + e^{-\beta x_i}})  $$
-$$ l(\beta) = \sum_{i = 1}^n y_i log(\frac{1}{1 + e^{-\beta x_i}}) + (1-y_i)log(\frac{e^{-\beta x_i}}{1 + e^{-\beta x_i}})  $$
-$$ l(\beta) = \sum_{i = 1}^n y_i log(\frac{1}{1 + e^{-\beta x_i}}) + log(\frac{e^{-\beta x_i}}{1 + e^{-\beta x_i}}) - y_i log(\frac{e^{-\beta x_i}}{1 + e^{-\beta x_i}}) $$
-$$ l(\beta) = \sum_{i = 1}^n y_i[(log(\frac{1}{1 + e^{-\beta x_i}}) - log(\frac{e^{-\beta x_i}}{1 + e^{-\beta x_i}}) )] + log(\frac{e^{-\beta x_i}}{1 + e^{-\beta x_i}}) $$
-$$ l(\beta) = \sum_{i = 1}^n y_i[log(e^{\beta x_i})] + log(\frac{1}{1 + e^{\beta x_i}}) $$
-$$ l(\beta) = \sum_{i = 1}^n y_i \beta x_i - log(1 + e^{\beta x_i}) $$
+$$l(\beta) = \sum_{i = 1}^n y_i log(\frac{1}{1 + e^{-\beta x_i}}) + (1-y_i)log(1-\frac{1}{1 + e^{-\beta x_i}})$$
+$$l(\beta) = \sum_{i = 1}^n y_i log(\frac{1}{1 + e^{-\beta x_i}}) + (1-y_i)log(\frac{e^{-\beta x_i}}{1 + e^{-\beta x_i}})$$
+$$l(\beta) = \sum_{i = 1}^n y_i log(\frac{1}{1 + e^{-\beta x_i}}) + log(\frac{e^{-\beta x_i}}{1 + e^{-\beta x_i}}) - y_i log(\frac{e^{-\beta x_i}}{1 + e^{-\beta x_i}})$$
+$$l(\beta) = \sum_{i = 1}^n y_i\[(log(\frac{1}{1 + e^{-\beta x_i}}) - log(\frac{e^{-\beta x_i}}{1 + e^{-\beta x_i}}) )] + log(\frac{e^{-\beta x_i}}{1 + e^{-\beta x_i}})$$
+$$l(\beta) = \sum_{i = 1}^n y_i\[log(e^{\beta x_i})] + log(\frac{1}{1 + e^{\beta x_i}})$$
+$$l(\beta) = \sum_{i = 1}^n y_i \beta x_i - log(1 + e^{\beta x_i})$$
 
 
 This is the final form of the log likelihood function and we need to find the value of $\beta$ that maximizes this function. Unfortunately, this equation is not linear, like the function that is minimized by least squares when computing $\beta$ for linear regression, this is a trascendental function and there is not a closed form solution, but we can use numerical methods to approximate the solution. We will be using the Newton-Raphson method but there are plenty of other ones. The Newton-Raphson method is defined for $\beta$ as:
-$$ \beta^{(t+1)} = \beta^t - \frac{\frac{d}{d\beta}l(\beta^{(t)})}{\frac{d^2}{d\beta^2}l(\beta^{(t)})} $$
+$$\beta^{(t+1)} = \beta^t - \frac{\frac{d}{d\beta}l(\beta^{(t)})}{\frac{d^2}{d\beta^2}l(\beta^{(t)})}$$
+
 Using this method, we can iterate until the value for the parameter vector $\beta$ converges. Let's derive our log-likelihood function with respect to $\beta$ and get our equations.
-$$ \frac{d}{d\beta}l(\beta) = \sum_{i = 1}^n \frac{d}{d\beta}[y_i \beta x_i - log(1 + e^{\beta x_i})] $$
-$$ \frac{d}{d\beta}l(\beta) = \sum_{i = 1}^n \frac{d}{d\beta}[y_i \beta x_i] -\frac{d}{d\beta} [log(1 + e^{\beta x_i})] $$
-$$ \frac{d}{d\beta}l(\beta) = \sum_{i = 1}^n y_i x_i -(\frac{1}{1 + e^{\beta x_i}}e^{\beta x_i}x_i) $$
-$$ \frac{d}{d\beta}l(\beta) = \sum_{i = 1}^n y_i x_i -(\frac{1}{1 + e^{-\beta x_i}}x_i) $$
-$$ \frac{d}{d\beta}l(\beta) = \sum_{i = 1}^n x_i(y_i -\frac{1}{1 + e^{-\beta x_i}}) $$
-$$ \frac{d}{d\beta}l(\beta) = \sum_{i = 1}^n x_i(y_i -p(x_i)) $$
+$$\frac{d}{d\beta}l(\beta) = \sum_{i = 1}^n \frac{d}{d\beta}\[y_i \beta x_i - log(1 + e^{\beta x_i})]$$
+$$\frac{d}{d\beta}l(\beta) = \sum_{i = 1}^n \frac{d}{d\beta}\[y_i \beta x_i] -\frac{d}{d\beta} \[log(1 + e^{\beta x_i})]$$
+$$\frac{d}{d\beta}l(\beta) = \sum_{i = 1}^n y_i x_i -(\frac{1}{1 + e^{\beta x_i}}e^{\beta x_i}x_i)$$
+$$\frac{d}{d\beta}l(\beta) = \sum_{i = 1}^n y_i x_i -(\frac{1}{1 + e^{-\beta x_i}}x_i)$$
+$$\frac{d}{d\beta}l(\beta) = \sum_{i = 1}^n x_i(y_i -\frac{1}{1 + e^{-\beta x_i}})$$
+$$\frac{d}{d\beta}l(\beta) = \sum_{i = 1}^n x_i(y_i -p(x_i))$$
 
 Now, we compute the second derivative with respect to $\beta$, called the Hessian matrix. 
-$$ \frac{d^2}{d\beta^2}l(\beta) = \sum_{i = 1}^n \frac{d}{d\beta}[x_i(y_i -p(x_i))] $$
-$$ \frac{d^2}{d\beta^2}l(\beta) = \sum_{i = 1}^n \frac{d}{d\beta}[-p(x_i)x_i] $$
-$$ \frac{d^2}{d\beta^2}l(\beta) = \sum_{i = 1}^n \frac{d}{d\beta}[-\frac{1}{1 + e^{-\beta x_i}}x_i] $$
+$$\frac{d^2}{d\beta^2}l(\beta) = \sum_{i = 1}^n \frac{d}{d\beta}\[x_i(y_i -p(x_i))]$$
+$$\frac{d^2}{d\beta^2}l(\beta) = \sum_{i = 1}^n \frac{d}{d\beta}\[-p(x_i)x_i]$$
+$$\frac{d^2}{d\beta^2}l(\beta) = \sum_{i = 1}^n \frac{d}{d\beta}\[-\frac{1}{1 + e^{-\beta x_i}}x_i]$$
 
 Using the quotient rule, we get: 
-$$ \frac{d^2}{d\beta^2}l(\beta) = -\sum_{i = 1}^n [\frac{1}{1 + e^{-\beta x_i}}]^2 e^{-\beta x_i} (x_i) x_i $$
-$$ \frac{d^2}{d\beta^2}l(\beta) = -\sum_{i = 1}^n [\frac{1}{1 + e^{-\beta x_i}}][\frac{ e^{-\beta x_i}}{1 + e^{-\beta x_i}}]x_i^T x_i $$
-$$ \frac{d^2}{d\beta^2}l(\beta) = -\sum_{i = 1}^n p(x_i)(1-p(x_i))x_i^T x_i $$
+$$\frac{d^2}{d\beta^2}l(\beta) = -\sum_{i = 1}^n \[\frac{1}{1 + e^{-\beta x_i}}]^2 e^{-\beta x_i} (x_i) x_i$$
+$$\frac{d^2}{d\beta^2}l(\beta) = -\sum_{i = 1}^n \[\frac{1}{1 + e^{-\beta x_i}}][\frac{ e^{-\beta x_i}}{1 + e^{-\beta x_i}}]x_i^T x_i$$
+$$\frac{d^2}{d\beta^2}l(\beta) = -\sum_{i = 1}^n p(x_i)(1-p(x_i))x_i^T x_i$$
 
 ## **Vectorization**
 We can now convert these derivatives into their vectorized forms to remove the summations. The vectorized representation of the first order derivative is:
-$$ \frac{d}{d\beta}l(\beta) = X^T(y - P(X)) $$ 
+$$\frac{d}{d\beta}l(\beta) = X^T(y - P(X))$$ 
+
 and the vectorized form of the second order derivative (Hessian matrix) is:
-$$ \frac{d^2}{d\beta^2}l(\beta) = -X^T P(X) (1-P(X)) X  $$
-$$ \frac{d^2}{d\beta^2}l(\beta) = -X^T W X  $$
+$$\frac{d^2}{d\beta^2}l(\beta) = -X^T P(X) (1-P(X)) X$$
+$$\frac{d^2}{d\beta^2}l(\beta) = -X^T W X$$
+
 where $X$ is the design matrix, $y$ is the vector of class labels taken from our dataset, $P(X)$ is the vector of predicted probabilities based on our design matrix and $\beta$, and $W$ is the vector $\hat{y}(1-\hat{y})$.
 
 Plugging these equations on the Newton-Raphson method gives us:
-$$ \beta^{(t+1)} = \beta^{(t)} - \frac{X^T(y - P(x)^{(t)})}{-X^T W^{(t)} X } $$
-$$ \beta^{(t+1)} = \beta^{(t)} - X^T(y - P(X)^{(t)})(-X^T W^{(t)} X)^{-1} $$
+$$\beta^{(t+1)} = \beta^{(t)} - \frac{X^T(y - P(x)^{(t)})}{-X^T W^{(t)} X}$$
+$$\beta^{(t+1)} = \beta^{(t)} - X^T(y - P(X)^{(t)})(-X^T W^{(t)} X)^{-1}$$
 
 We can now initialize the parameter vector $\beta$ to a random value and use this equation over multiple iterations in order to find the optimal $\beta$. Now let's do the iteration in code and see the results.
 
@@ -151,7 +170,7 @@ print(f'β after {len(it)} iterations: {beta}')
     β after 500 iterations: [-5.97  1.14]
     
 
-As you can see, we initialized the parameter vector to random values sampled from a normal distribution with mean 0 and $\sigma$ = 1 and it eventually converged into the final values. Let's plot the values of $\beta$ on the different iterations of the algorithm.
+As you can see, we initialized the parameter vector to random values sampled from a normal distribution with mean $0$ and $\sigma = 1$ and it eventually converged into the final values. Let's plot the values of $\beta$ on the different iterations of the algorithm.
 
 
 ```python
@@ -170,7 +189,7 @@ plt.show()
 
 
     
-![png](output_14_0.png)
+![png](/images/log_3.png)
     
 
 
@@ -204,22 +223,7 @@ df.head()
 ```
 
 
-
-
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -297,7 +301,7 @@ plt.show()
 
 
     
-![png](output_21_0.png)
+![png](/images/log_4.png)
     
 
 
@@ -368,7 +372,7 @@ plt.show()
 
 
     
-![png](output_27_0.png)
+![png](/images/log_5.png)
     
 
 
@@ -389,7 +393,7 @@ plt.show()
 
 
     
-![png](output_29_0.png)
+![png](/images/log_6.png)
     
 
 
@@ -398,11 +402,14 @@ The purple area of our plot is the zone where the logistic function that was fit
 ## **Coefficient of determination ($R^2$) for logistic regression**
 
 In linear regression analysis, we saw that it was really easy to calculate an $R^2$ value that gave us information about how well the dependent variable was explained by independent variables. In logistic regression it is not that easy, since the residuals when we work with the log-likelihoods to get a linear space are infinite. Because of this, there is not a consensus on the best way to get a value that explains the same as $R^2$, there are over 10 different $R^2$'s and none is better than another one. For this example we will calculate McFadden's Pseudo $R^2$, since it is very similar to good old linear regression $R^2$. To start off, we obtain the log-likelihood of our data given the best fitting sigmoid. This is given by the formula:
-$$ l(\beta) = \sum_{i = 1}^n y_i log(p(x_i)) + (1-y_i)log(1-p(x_i))  $$
-We calculate this for our estimated best parameter vector $\beta$ and this would be analogous to our SSR(fit) of the $R^2$ equation. For our baseline fit (analogous to SSR(mean)), we can consider the overall probability without taking the independent variable into account, obtained as the number of samples labeled as 1 over the total number of samples. We then calculate the log-likelihood considering this probability for every sample and we have our baseline metric. From then, calculating McFadden's Pseudo $R^2$ is the same as calculating $R^2$:
-$$ R^2 = 1 - \frac{l_{fit}}{l_{overall}} $$
-The interpretation of this $R^2$ value is similar to linear regression, models that do poorly in explaining the probability of a certain event have an $R^2$ close to 0, while models that are good in explaining this probability have values that are close to 1. Expanding on the $R^2$ concept, we can also calculate an adjusted pseudo-$R^2$ that compensates for additional independent variables with the equation:
-$$ R^2 = 1 - \frac{l_{fit} - K}{l_{overall}} $$
+$$l(\beta) = \sum_{i = 1}^n y_i log(p(x_i)) + (1-y_i)log(1-p(x_i))$$
+
+We calculate this for our estimated best parameter vector $\beta$ and this would be analogous to our $SSR_{fit}$ of the $R^2$ equation. For our baseline fit (equivalent to $SSR_{mean}$), we can consider the overall probability without taking the independent variable into account, obtained as the number of samples labeled as 1 over the total number of samples. We then calculate the log-likelihood considering this probability for every sample and we have our baseline metric. From then, calculating McFadden's Pseudo $R^2$ is the same as calculating $R^2$:
+$$R^2 = 1 - \frac{l_{fit}}{l_{overall}}$$
+
+The interpretation of this $R^2$ value is similar to linear regression, models that do poorly in explaining the probability of a certain event have an $R^2$ close to 0, while models that are good in explaining this probability have values that are close to 1. Expanding on the $R^2$ concept, we can also calculate an adjusted pseudo $R^2$ that compensates for additional independent variables with the equation:
+$$R^2 = 1 - \frac{l_{fit} - K}{l_{overall}}$$
+
 where K is the number of independent variables in our dataset.
 
 
@@ -421,7 +428,7 @@ print(f'McFadden\'s adjusted pseudo-R² for our logistic regression sigmoid: {r2
 
 The $R^2$ value that we got is pretty high, meaning that our logistic regression fit is pretty good at predicting probabilities. Calculating a p-value for McFadden's Pseudo $R^2$ is pretty straight forward.
 
-$ 2(l_{fit} - l_{overall})$ is equal to a Chi-squared value from a distribution whose degrees of freedom are equal to the number of parameters in the fitted sigmoid minus the number of parameters in the overall probability line when converted to a log-likelihood range. Below, we will calculate the p-value that accompanies this $R^2$.
+$2(l_{fit} - l_{overall})$ is equal to a Chi-squared value from a distribution whose degrees of freedom are equal to the number of parameters in the fitted sigmoid minus the number of parameters in the overall probability line when converted to a log-likelihood range. Below, we will calculate the p-value that accompanies this $R^2$.
 
 
 ```python
