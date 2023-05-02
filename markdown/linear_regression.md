@@ -1,6 +1,6 @@
 # **Linear Regression**
 
-Linear Regression is a model that attempts to explain the relationship between two variables by fitting a linear equation ($ y = mx + b $) to the data. One of the variables is considered a **dependent** variable in the sense that it can be obtained as a function of the other variable(s), which are **independent**. For a linear regression model to be effective, there has to be a linear relationship between the variables that are going to be used, and some common ways to see if our model is going to work or not is to visualize the data with a scatter plot, or obtain the correlation between our variables.
+**Linear Regression** is a model that attempts to explain the **relationship** between two variables by fitting a **linear equation** $y = mx + b$ to the data. One of the variables is considered a **dependent** variable in the sense that it can be obtained as a **function** of the other variable(s), which are **independent**. Let's create a very simple **dataset** to see what linear regression does.
 
 
 ```python
@@ -22,19 +22,7 @@ plt.show()
 ![png](/images/lr_1.png)
     
 
-
-We can see that visually, the data follows a clear linear relationship, where as x increases, y does too. We can also confirm this relationship by obtaining the correlation between the variables.
-
-
-```python
-corr = np.corrcoef(x, y)
-print(f'The correlation between x and y is: {corr[0, 1]:.4f}')
-```
-
-    The correlation between x and y is: 0.9797
-    
-
-The linear regression algorithm starts off by creating a linear model that tries to describe our data, and then improving it by reducing the error between our data points and the fitted line. The first line that is fit to the data is a horizontal line with a slope and y-intercept of 0, giving the equation $ y = 0$
+We can see that we have **10** data points that visually follow a clear **linear relationship**, where as x **increases**, y does too. The linear regression algorithm starts off by creating a **linear model** that tries to describe our data, and then **improving** it by reducing the **error** between our data points and the fitted line. The first line that is fit to the data is a horizontal line with a **slope** and **y-intercept** of 0, giving the equation $y = 0$
 
 
 ```python
@@ -50,12 +38,11 @@ plt.show()
     
 
 
-This line doesn't do that well of a job describing the relationship between our data. A formal way to describe how _bad_ this fitted line is, is to obtain the error between the line and the actual data samples. There are many ways to represent error, the most common ones being: Sum of Squared Residuals (SSR), Mean Absolute Error (MAE), Mean Squared Error (MAE) and Root Mean Squared Error (RMSE). The equations describing these errors are: $$ SSR = \sum \limits _{i = 0} ^{n} (y_i - Y_i)^2 $$ 
-$$ MAE = \frac{1}{n}\sum \limits _{i = 0} ^{n} |y_i - Y_i| $$
-$$ MSE = \frac{1}{n} \sum \limits _{i = 0} ^{n} (y_i - Y_i)^2 $$
-$$ RMSE = \sqrt{\frac{1}{n} \sum \limits _{i = 0} ^{n} (y_i - Y_i)^2} $$ 
-For obtaining the error when modelling data using linear regression, the preffered method is SSR. The SSR function and the calculation for our dataset is shown below.
+This line doesn't do that well of a job describing the **relationship** between our data. A formal way to describe how _bad_ this fitted line is, is to obtain the **error** between the line and the actual data samples. There are many ways to represent error, the most common ones being: **sum of squared residuals (SSR), mean absolute error, mean squared error**, and **root mean squared error**. For obtaining the error when modeling data using linear regression, the preffered method is **SSR**. The equations describing this error is: 
 
+$$SSR(y_i, Y_i) = \sum \limits _{i = 0} ^{n} (y_i - Y_i)^2$$ 
+
+Where $y_i$ is the **actual** value for the data point and $Y_i$ is the **estimation** obtained from the fitted line.  The **SSR** function and the calculation for our dataset is shown below.
 
 ```python
 def SSR(y1, y2):
@@ -71,7 +58,7 @@ print(f'SSR for y = 0: {SSR(y, yi):.2f}')
     SSR for y = 0: 413.19
     
 
-The sum of squared residuals is quite large. Let's see what happens if we increase the slope of our data a little bit. The linear equation of our model is now $y = 0.4x$
+The sum of squared residuals is quite **large**. Let's see what happens if we increase the **slope** of our data a little bit. The linear equation of our model is now $y = 0.4x$
 
 
 ```python
@@ -87,7 +74,7 @@ plt.show()
     
 
 
-Visually, we can see that the line fits our data a little bit better than the initial fit. Let's back these observations by calculating the sum of squared residuals for this fit.
+Visually, we can see that the line fits our data a little bit **better** than the initial fit. Let's back these observations by calculating the **sum of squared residuals** for this fit.
 
 
 ```python
@@ -97,7 +84,7 @@ print(f'SSR for y = 0.4x: {SSR(y, yi):.2f}')
     SSR for y = 0.4x: 148.53
     
 
-The sum of the squared residuals is almost 3 times as small now. We can keep increasing the slope and keep comparing the sum of squared residuals and we should keep getting better and better results, but what happens if the slope is too high? Let's do a test when $ y = 2x$
+The sum of the squared residuals is almost **3** times as **small** now. We can keep increasing the slope and keep **comparing** the sum of squared residuals and we should keep getting **better and better** results, but what happens if the slope is **too high**? Let's do a test when $y = 2x$
 
 
 ```python
@@ -117,7 +104,7 @@ print(f'SSR for y = 0.4x: {SSR(y, yi):.2f}')
     SSR for y = 0.4x: 452.30
     
 
-Now the SSR for our fitted line is even worse than what we started with. This behavior suggests that there should be a sweet spot in the slope value between 0.4 and 2, where the SSR is the least it can be. We can define our sum of squared residuals as a function of our slope $m$ and see how it behaves as the slope changes. In this example, we are only going to optimize the slope $m$, so we will consider a y-intercept $b$ of $0$. Later on, we will explore how we can optimize both parameters at the same time.
+Now the **SSR** for our fitted line is even **worse** than what we started with. This behavior suggests that there should be a **sweet spot** in the slope value between **0.4** and **2**, where the **SSR** is the **least** it can be. We can define our sum of squared residuals as a **function** of our slope $m$ and see how it behaves as the slope changes. In this example, we are only going to **optimize** the slope $m$, so we will consider a **y-intercept** $b$ of $0$. Later on, we will explore how we can **optimize both parameters** at the same time.
 
 
 ```python
@@ -138,15 +125,17 @@ plt.show()
     
 
 
-We can see that there is a point when $ m \approx 0.95 $ where the SSR is minimum. This is the slope that gives us the best fitted line for our data. There are several approaches to finding the exact value of the slope, most of them relying on the concept of derivatives and how they approach $0$ near a minimum (or maximum) of our function. We will use least squares to find the optimal value, which involves finding where the derivative is equal to $0$, but there are other methods, like gradient descent. When differentiating the SSR function with respect to the slope value, we get 
-$$ SSR = \sum \limits _{i = 0} ^{n} (y_i - Y_i)^2 $$ 
-$$ \frac{d}{dm}SSR(m) = -2\sum \limits _{i = 0} ^{n} x_i(y_i - (mx_i + b)) $$ 
+We can see that there is a **point** when $m \approx 0.95$ where the **SSR** is **minimum**. This is the slope that gives us the **best** fitted line for our data. There are several approaches to finding the **exact** value of the slope, most of them relying on the concept of **derivatives** and how they approach $0$ near a minimum (or maximum) of our function. We will use **least squares** to find the optimal value, which involves finding where the derivative is equal to $0$, but there are other methods, like **gradient descent**. When differentiating the **SSR** function with respect to the slope value, we get:
+
+$$SSR(y_i, Y_i) = \sum \limits _{i = 0} ^{n} (y_i - Y_i)^2$$ 
+$$\frac{d}{dm}SSR(m) = -2\sum \limits _{i = 0} ^{n} x_i(y_i - (mx_i + b))$$ 
 When equating this expression to $0$, we get the following reduction
-$$ -2\sum \limits _{i = 0} ^{n} x_i(y_i - (mx_i + b)) = 0$$ 
-$$ \sum \limits _{i = 0} ^{n} (y_i x_i -  mx_i^2 + b x_i) = 0$$ 
-$$ m\sum \limits _{i = 0} ^{n} x_i^2 = \sum \limits _{i = 0} ^{n} y_i x_i - b\sum \limits _{i = 0} ^{n} x_i$$ 
-$$ m = \frac {\sum \limits _{i = 0} ^{n} y_i x_i - b\sum \limits _{i = 0} ^{n} x_i}{\sum \limits _{i = 0} ^{n} x_i^2 }$$ 
-Since in this example we are only optimizing the slope ($m$) and we set the y-intercept ($b$) to 0, we can perform the summation and get our value for the slope
+$$-2\sum \limits _{i = 0} ^{n} x_i(y_i - (mx_i + b)) = 0$$ 
+$$\sum \limits _{i = 0} ^{n} (y_i x_i -  mx_i^2 + b x_i) = 0$$ 
+$$m\sum \limits _{i = 0} ^{n} x_i^2 = \sum \limits _{i = 0} ^{n} y_i x_i - b\sum \limits _{i = 0} ^{n} x_i$$ 
+$$m = \frac {\sum \limits _{i = 0} ^{n} y_i x_i - b\sum \limits _{i = 0} ^{n} x_i}{\sum \limits _{i = 0} ^{n} x_i^2 }$$ 
+
+Since in this example we are only **optimizing** the slope ($m$) and we set the y-intercept ($b$) to 0, we can perform the summation and get our value for the slope.
 
 
 ```python
@@ -179,7 +168,7 @@ print(f'SSR for y = 0.9770x: {SSR(y, yi):.2f}')
     SSR for y = 0.9770x: 6.78
     
 
-Now, we have fit the line that gives the lowest possible SSR, meaning that we have the best possible fit and we can move over to making predictions by plugging in x values into our line equation or getting information from our fitted line. As of now, we have pretty much ignored another crucial parameter on our regression line, the y-intercept, or $b$ term. We can solve for both variables at the same time by finding the local minimum of a multivariate function. Let's see this with another dataset.
+Now, we have **fit** the line that gives the **lowest possible SSR**, meaning that we have the best possible fit and we can move over to making **predictions** by plugging in x values into our line equation or getting information from our fitted line. As of now, we have pretty much ignored another **crucial** parameter on our regression line, the **y-intercept**, or $b$ term. We can solve for **both** variables at the same time by finding the **local minimum** of a **multivariate** function. Let's see this with another dataset.
 
 
 ```python
@@ -198,7 +187,7 @@ plt.show()
     
 
 
-Now, we fit an initial line with just a y-intercept of $\bar{x}$. We can see that the SSR is quite large.
+Now, we fit an initial line with just a **y-intercept** of $\bar{x}$. We can see that the **SSR** is quite large.
 
 
 ```python
@@ -218,7 +207,7 @@ print(f'SSR for y = x̄: {SSR(y, yi):.2f}')
     SSR for y = x̄: 671.42
     
 
-When plotting the SSR as a colormesh, we can see that the function is convex and there is a point where the SSR is minimum. We will use least squares to obtain the optimal values for the model parameters.
+When plotting the **SSR** as a color mesh, we can see that the function is **convex** and there is a point where the **SSR** is **minimum**. We will use **least squares** to obtain the optimal values for the **model parameters**.
 
 
 ```python
@@ -245,10 +234,11 @@ plt.show()
     
 
 
-When deriving the original SSR equation with respect to both $m$ and $b$, and equating each one to zero to find the mininum, we get the following two equations:
-$$ m\sum \limits _{i = 0} ^{n} x_i^2 + b\sum \limits _{i = 0} ^{n} x_i = \sum \limits _{i = 0} ^{n} x_i y_i$$ 
-$$ m\sum \limits _{i = 0} ^{n} x_i + bn = \sum \limits _{i = 0} ^{n} y_i$$ 
-With this, we can substitute the summations with the values obtained from our data to get a system of equations that we can solve to get the optimal parameters. In the case of our example:
+When **deriving** the original **SSR** equation with respect to both $m$ and $b$, and equating each one to zero to find the **mininum**, we get the following two equations:
+$$m\sum \limits _{i = 0} ^{n} x_i^2 + b\sum \limits _{i = 0} ^{n} x_i = \sum \limits _{i = 0} ^{n} x_i y_i$$ 
+$$m\sum \limits _{i = 0} ^{n} x_i + bn = \sum \limits _{i = 0} ^{n} y_i$$ 
+
+With this, we can substitute the summations with the values obtained from our data to get a **system of equations** that we can solve to get the optimal parameters. In the case of our example:
 
 
 ```python
@@ -272,9 +262,9 @@ print(f'Number of samples: {n:.2f}')
     Number of samples: 10.00
     
 
-These values give the following system of equations.
-$$ 425.74m + 55b = 1163.68 $$
-$$ 55m + 10b = 159.70 $$
+These values give the following **system of equations**.
+$$425.74m + 55b = 1163.68$$
+$$55m + 10b = 159.70$$
 
 
 ```python
@@ -287,7 +277,7 @@ print(f'Best slope: {best_m:.2f}, best y-intercept: {best_b:.2f}')
     Best slope: 2.32, best y-intercept: 3.24
     
 
-Now we have found the best values for both parameters at the same time! The resulting line would be $y = 2.23x + 5.73$. We can plot the final regression line with the original data samples and confirm that the values obtained are indeed a great fit.
+Now we have found the **best values** for both parameters at the same time! The resulting line would be $y = 2.23x + 5.73$. We can plot the final **regression line** with the original data samples and confirm that the values obtained are indeed a **great fit**.
 
 
 ```python
@@ -307,7 +297,7 @@ print(f'SSR for y = 2.32x + 3.24: {SSR(y, yi):.2f}')
     SSR for y = 2.32x + 3.24: 10.82
     
 
-We can use scikit-learn's LinearRegression model to fit our data to a line using optimized algorithms. We can confirm that both methods give the best result since the parameters in both models are the same.
+We can use **scikit-learn's** `LinearRegression` model to fit our data to a line using **optimized algorithms**. We can confirm that both methods give the **best** result since the parameters in both models are the same.
 
 
 ```python
@@ -515,7 +505,34 @@ Since this is a more complex dataset and the data can be dispersed through 3 dif
 Simple and multiple linear regression model have some general facts that are taken as a given for the model to give an accurate result. These facts are known as the assumptions of linear regression and there are four main assumptions listed by statisticians. Let's explore these assumptions one by one.
 
 ### **Linear relationship**
-For a linear model to correctly describe the relationship of two variables, it is obvious that they need to actually have a linear relationship. Non-linear relationships are common when working with complex datasets and they cannot be modeled by linear regression.
+For a linear regression model to be effective, there has to be a linear relationship between the variables that are going to be used, and some common ways to see if our model is going to work or not is to visualize the data with a scatter plot, or obtain the correlation between our variables. Let's test this on the simple scatter plot used at the beginning.
+
+```python
+x = np.linspace(start = 0, stop = 11, num = 10)
+y = np.array([n + np.random.randint(-2, 2) for n in x]) 
+
+plt.plot(x, y, 'ro')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.show()
+```
+
+
+    
+![png](/images/lr_1.png)
+    
+
+We can see that visually, the data follows a clear linear relationship. We can also confirm this relationship by obtaining the Pearson correlation coefficient between the variables.
+
+
+```python
+corr = np.corrcoef(x, y)
+print(f'The correlation between x and y is: {corr[0, 1]:.4f}')
+```
+
+    The correlation between x and y is: 0.9797
+
+The correlation coefficient is very close to 1, so we can confirm that our model follows a linear trend and this assumption of linear regression is satisfied. Non-linear relationships are common when working with complex datasets and they cannot be modeled by linear regression.
 
 ### **Homoscedasticity**
 This property allows the model to assume that the variance of the errors is constant across the domain of the variables. This means that no matter where we stand in the number line of the independent variable, the error term will be roughly the same. Heteroscedasticity would mean that our errors drift in variance depending on the value of the independent variable and thus, cannot be correctly modeled using linear regression.
@@ -552,41 +569,47 @@ print(f'Correlation value between independent variables: {np.corrcoef(X.T)[0, 1]
 Visually, the relationship is disperse, and this can be confirmed by the low correlation value between the variables, so we don't need to worry about multicolinearity in this dataset.
 
 ## **Vectorization**
-
 One way to simplify least squares calculations is to vectorize our equations. This has two main advantages, it gives more compact equations and it makes the code faster by using optimized vector libraries. When vectorizing our linear regression equation, we get the following:
-$$ \hat{y}_i(x^{(i)}) = \sum\limits _{j = 0} ^{d} \beta_j x^{(i)}_{j}$$
+$$\hat{y}_i(x^{(i)}) = \sum\limits _{j = 0} ^{d} \beta_j x^{(i)} _{j}$$
 
 where $y_i$ is the predicted dependent variable of sample $i$, $\beta_j$ is the slope parameter of the independent feature $j$ and $x^{(i)}_{j}$ is the value of the input variable $j$ in sample $i$.
 
 Now, let:
-
-$$ \beta = \begin{bmatrix} \beta_0 \\ \beta_1 \\ \vdots \\ \beta_j\end{bmatrix}\textrm{,}\ \  \hat{y} = \begin{bmatrix} \hat{y}_1 \\ \hat{y}_2 \\ \vdots \\ \hat{y}_n \end{bmatrix} \textrm{and}\ \  X = \begin{bmatrix} 1 & x_1^{(1)} & \ldots & x_j ^{(1)} \\ 1 & x_1^{(2)} & \ldots & x_j ^{(2)} \\ \vdots & \vdots & \ddots & \vdots\\ 1 & x_1^{(i)} & \ldots & x_j ^{(i)} \\ \vdots & \vdots & \ddots & \vdots\\ 1 & x_1^{(n)} & \ldots & x_j ^{(n)} \end{bmatrix} $$
-
-<br><br>$\beta$ is the parameter vector where $\beta_0$ is the y-intercept and $\beta_j, j > 0$ is the slope or weight parameter of the $j^{th}$ independent variable or feature. $\hat{y}$ is the vector of predicted values of the dependent variable, where each column represents the value at sample $i$ for $n$ samples. $X$ is the matrix of independent variables or design matrix that contains the input values for a sample $i$ for every independent variable $j$. The design matrix often contains a first row full of 1's so that the first term will correspond to the y-intercept when multiplied by $\beta_0$. The sizes of the parameter vector, predicted dependent variable vector and design matrix are $(d+1)\times1$, $n\times1$, and $n\times(d+1)$ respectively, where $n$ is the number of samples and $d$ is the number of independent variables. Using these matrices, the model can be written in vectorized form such that:
+```math
+\beta = \begin{bmatrix} \beta_0 \\ \beta_1 \\ \vdots \\ \beta_j\end{bmatrix}\textrm{,}\ \  \hat{y} = \begin{bmatrix} \hat{y}_1 \\ \hat{y}_2 \\ \vdots \\ \hat{y}_n \end{bmatrix} \textrm{and}\ \  X = \begin{bmatrix} 1 & x_1^{(1)} & \ldots & x_j ^{(1)} \\ 1 & x_1^{(2)} & \ldots & x_j ^{(2)} \\ \vdots & \vdots & \ddots & \vdots\\ 1 & x_1^{(i)} & \ldots & x_j ^{(i)} \\ \vdots & \vdots & \ddots & \vdots\\ 1 & x_1^{(n)} & \ldots & x_j ^{(n)} \end{bmatrix}
+```
+<br><br>
+$\beta$ is the parameter vector where $\beta_0$ is the y-intercept and $\beta_j, j > 0$ is the slope or weight parameter of the $j^{th}$ independent variable or feature. $\hat{y}$ is the vector of predicted values of the dependent variable, where each column represents the value at sample $i$ for $n$ samples. $X$ is the matrix of independent variables or design matrix that contains the input values for a sample $i$ for every independent variable $j$. The design matrix often contains a first row full of 1's so that the first term will correspond to the y-intercept when multiplied by $\beta_0$. The sizes of the parameter vector, predicted dependent variable vector and design matrix are $(d+1)\times1$, $n\times1$, and $n\times(d+1)$ respectively, where $n$ is the number of samples and $d$ is the number of independent variables. Using these matrices, the model can be written in vectorized form such that:
 $$\hat{y} = X\beta$$
 
-Now, considering the sum of squared residuals function and the column vector $y$ of observed dependent variable values taken from our dataset such that: $$ y = \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix} $$ we would have:
-$$ SSR(\hat{y}, y) = \sum \limits _{i = 0} ^{n} (\hat{y}_i - y_i)^2 $$ 
-$$ SSR(\beta) =(X \beta - y)^2 $$ 
-$$ SSR(\beta) =(X \beta - y)^T (X \beta - y) $$ 
+Now, considering the sum of squared residuals function and the column vector $y$ of observed dependent variable values taken from our dataset such that:
+
+```math
+y=\begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix}$$
+```
+
+we would have:
+$$SSR(\hat{y}, y) = \sum \limits _{i = 0} ^{n} (\hat{y}_i - y_i)^2$$ 
+$$SSR(\beta) =(X \beta - y)^2$$ 
+$$SSR(\beta) =(X \beta - y)^T (X \beta - y)$$ 
 
 <br><br>Expanding the terms by considering that $(AB)^T = B^T A^T$ and $(A + B)^T = A^T + B^T$:
-$$SSR(\beta) =(\beta^T X^T - y^T)(X \beta - y) $$
-$$SSR(\beta) =\beta^T X^T X\beta - y^T X\beta - \beta^T X^Ty + y^Ty  $$
-$$SSR(\beta) = \beta^T X^T X\beta - 2\beta^T X^Ty + y^Ty  $$
+$$SSR(\beta) =(\beta^T X^T - y^T)(X \beta - y)$$
+$$SSR(\beta) =\beta^T X^T X\beta - y^T X\beta - \beta^T X^Ty + y^Ty$$
+$$SSR(\beta) = \beta^T X^T X\beta - 2\beta^T X^Ty + y^Ty$$
 
 <br><br>Now, we derive the vectorized SSR with respect to $\beta$ considering that $\frac{d}{dA}(A^T A) = 2A$ and $\frac{d}{dA}(A^T) = 1$:<br><br>
-$$ \frac{d}{d\beta}(SSR(\beta)) =\frac{d}{d\beta}(\beta^T X^T X\beta - 2\beta^T X^Ty + y^Ty)$$ 
-$$ \frac{d}{d\beta}(SSR(\beta)) =\frac{d}{d\beta}(\beta^T X^T X\beta) -2\frac{d}{d\beta}(\beta^T X^Ty) + \frac{d}{d\beta}(y^Ty)$$ 
-$$ \frac{d}{d\beta}(SSR(\beta)) =X^T X\frac{d}{d\beta}(\beta^T\beta) -2X^Ty\frac{d}{d\beta}(\beta^T)$$ 
-$$ \frac{d}{d\beta}(SSR(\beta)) =X^T X 2\beta -2X^Ty$$ 
-$$ \frac{d}{d\beta}(SSR(\beta)) = 2(X^T X\beta - X^Ty)$$ 
+$$\frac{d}{d\beta}(SSR(\beta)) =\frac{d}{d\beta}(\beta^T X^T X\beta - 2\beta^T X^Ty + y^Ty)$$ 
+$$\frac{d}{d\beta}(SSR(\beta)) =\frac{d}{d\beta}(\beta^T X^T X\beta) -2\frac{d}{d\beta}(\beta^T X^Ty) + \frac{d}{d\beta}(y^Ty)$$ 
+$$\frac{d}{d\beta}(SSR(\beta)) =X^T X\frac{d}{d\beta}(\beta^T\beta) -2X^Ty\frac{d}{d\beta}(\beta^T)$$ 
+$$\frac{d}{d\beta}(SSR(\beta)) =X^T X 2\beta -2X^Ty$$ 
+$$\frac{d}{d\beta}(SSR(\beta)) = 2(X^T X\beta - X^Ty)$$ 
 
 <br><br>Equating the derivative to $0$ in order to obtained the least squares value for $\beta$ gives us:
-$$ 2(X^T X\beta - X^Ty) = 0 $$
-$$ X^T X\beta - X^Ty = 0 $$
-$$ X^T X\beta = X^Ty $$
-$$\beta = (X^T X)^{-1} X^Ty $$
+$$2(X^T X\beta - X^Ty) = 0$$
+$$X^T X\beta - X^Ty = 0$$
+$$X^T X\beta = X^Ty$$
+$$\beta = (X^T X)^{-1} X^Ty$$
 
 <br><br>This is the vectorized form of the least squares formula that solves for the optimal parameter vector $\beta$ as a function of the design matrix $X$ and the independent variable values $y$, both of which are obtained from our base data set.
 
@@ -606,7 +629,7 @@ print(f'Parameter vector obtained with vectorized equations: {beta}')
 
 We can see that the parameters obtained with the vectorized equation gives us the same parameters obtained through the scikit-learn LinearRegression model, where the model.intercept_ is the first element in our parameter vector and the remaining elements conform the model.coef_ vector.
 
-Additionaly, $(A^TA)^{-1} A^T $ is known as the pseudo-inverse of A, and it is denoted as $A^+$. This means that our entire least squares equation can be expressed as $\beta = X^+ y$, and simplified in code by using NumPy's pseudo-inverse function (np.lingalg.pinv). In the below code, we can see that the resulting matrix is the exact same as the one above.
+Additionaly, $(A^TA)^{-1} A^T$ is known as the pseudo-inverse of A, and it is denoted as $A^+$. This means that our entire least squares equation can be expressed as $\beta = X^+ y$, and simplified in code by using NumPy's pseudo-inverse function (np.lingalg.pinv). In the below code, we can see that the resulting matrix is the exact same as the one above.
 
 
 ```python
@@ -655,7 +678,9 @@ print(f'Sum of squares around the mean: {ssrm:.4f}\nSum of squares around the fi
     Sum of squares around the fitted line: 28.1333
     
 
-We can see that the sum of squares around the fitted line is much lower than the sum of squares around the mean. $R^2$ is traditionally defined as: $$ R^2 = 1 - \frac{\sigma^2_{f}}{\sigma^2_{m}} $$ where $\sigma^2$ is the variance in the data, obtained as $\sigma^2 = \frac{SSR}{n}$ where SSR is the sum of squared residuals around a particular line (when only describing a dataset and not a regression line it would be the mean, this is what variance usually refers to) and $n$ is the number of observations. $\sigma^2_{f}$ is the statistical variance around the fit and $\sigma^2_{m}$ is the variance around the mean. Since both variances use the same number of observations, $R^2$ is defined as: $$ R^2 = 1 - \frac{SSR_{f}}{SSR_{m}} $$
+We can see that the sum of squares around the fitted line is much lower than the sum of squares around the mean. $R^2$ is traditionally defined as: 
+$$R^2 = 1 - \frac{\sigma^2_{f}}{\sigma^2_{m}}$$ where $\sigma^2$ is the variance in the data, obtained as $\sigma^2 = \frac{SSR}{n}$ where SSR is the sum of squared residuals around a particular line (when only describing a dataset and not a regression line it would be the mean, this is what variance usually refers to) and $n$ is the number of observations. $\sigma^2_{f}$ is the statistical variance around the fit and $\sigma^2_{m}$ is the variance around the mean. Since both variances use the same number of observations, $R^2$ is defined as: 
+$$R^2 = 1 - \frac{SSR_{f}}{SSR_{m}}$$
 Lets obtain $R^2$ for our fitted line.
 
 
@@ -670,7 +695,7 @@ print(f'Coefficient of determination (R²) for our regression line: {r2:.4f} or 
 The value for $R^2$ is really close to 1, or 100%. What does this mean? That 95.81% of the variation in the independent variable is explained by taking our dependent variable into account. A lower value of $R^2$ would mean that not as much of the variation is explained with our features, or that our fitted line is not as good in explaining our dependent variable. 
 
 $R^2$ for multiple regression gives the same insight as in simple linear regression, but an adjust needs to be made to compensate for the extra parameters. The adjusted $R^2$ also compensates for data with low sample count. $R^2$ The equation for adjusted $R^2$ is: 
-$$ R^2 = 1- \frac{(1-R^2)(n-1)}{n-p-1} $$
+$$R^2 = 1- \frac{(1-R^2)(n-1)}{n-p-1}$$
 where $R^2$ is the unadjusted value, $n$ is the number of samples and $p$ is the number of independent variables. Let's see this in action using our adveritising dataset.
 
 
@@ -715,7 +740,9 @@ When we only consider a single independent variable, only 61.19% of our variance
 
 ### **p-value for $R^2$**
 
-One important thing we need to consider is how statistically significant our $R^2$ value is. Suppose we only have 2 samples in our dataset and we obtain a regression line. The $R^2$ value would be 1 or 100%, since you can always draw a line that passes through those two points, but it would not be statistically significant since we only have 2 samples and cannot generalize it. To obtain the p-value for $R^2$ we take into account $F$, which is defined as: $$ F = \frac {(SSR_m - SSR_f)/(p_f - p_m) }{SSR_f / (n - p_f)} $$ where $SSR_m$ and $SSR_f$ are the sum of squared residuals around the mean and the fitted line respectively, $p_f$ are the number of parameters in the fitted line, $p_m$ are the number of parameters in the mean and $n$ is the number of samples.
+One important thing we need to consider is how statistically significant our $R^2$ value is. Suppose we only have 2 samples in our dataset and we obtain a regression line. The $R^2$ value would be 1 or 100%, since you can always draw a line that passes through those two points, but it would not be statistically significant since we only have 2 samples and cannot generalize it. To obtain the p-value for $R^2$ we take into account $F$, which is defined as: 
+$$F = \frac {(SSR_m - SSR_f)/(p_f - p_m) }{SSR_f / (n - p_f)}$$ 
+where $SSR_m$ and $SSR_f$ are the sum of squared residuals around the mean and the fitted line respectively, $p_f$ are the number of parameters in the fitted line, $p_m$ are the number of parameters in the mean and $n$ is the number of samples.
 $(p_f - p_m)$ and $(n-p_f)$ are known as the degrees of freedom in the numerator and denominator. 
 
 In order to obtain p-values, we need to calculate the distribution of F for random values with the same degrees of freedom, and then obtain the p-value from the distribution by dividing the more extreme values than the F value for our particular regression over the total values. F-distributions are already characterized by their degrees of freedom and we don't need to calculate them by hand, we can just refer to their values at our specific point and calculate the p-value. Let's obtain the p-value for $R^2$ that we got on the simple regression.
