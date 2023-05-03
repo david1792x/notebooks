@@ -129,6 +129,7 @@ We can see that there is a **point** when $m \approx 0.95$ where the **SSR** is 
 
 $$SSR(y_i, Y_i) = \sum \limits _{i = 0} ^{n} (y_i - Y_i)^2$$ 
 $$\frac{d}{dm}SSR(m) = -2\sum \limits _{i = 0} ^{n} x_i(y_i - (mx_i + b))$$ 
+
 When equating this expression to $0$, we get the following reduction
 $$-2\sum \limits _{i = 0} ^{n} x_i(y_i - (mx_i + b)) = 0$$ 
 $$\sum \limits _{i = 0} ^{n} (y_i x_i -  mx_i^2 + b x_i) = 0$$ 
