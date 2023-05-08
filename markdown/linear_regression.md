@@ -439,7 +439,7 @@ ax2.view_init(elev=4, azim=114)
     
 
 
-We can clearly see that the plot resembles a plane, meaning that multiple regression would likely give a very good fit to our data. We will run it through scikit-learn's LinearRegression model in order to see the optimal fit.
+We can clearly see that the plot resembles a **plane**, meaning that multiple regression would likely give a very **good** fit to our data. We will run it through **scikit-learn's** `LinearRegression` model in order to see the **optimal** fit.
 
 
 ```python
@@ -454,7 +454,7 @@ print(f'Slope parameter matrix for our model:\n{model.coef_} with intercept {mod
     [0.046 0.188] with intercept 2.921
     
 
-The LinearRegression model uses least squares to estimate the best parameters, and further on we will analyze the analitical solution to multiple least squares, for now, we can see that the algorithm reached an optimal plane and we can plot it on a 3D graph to see how well it fits the data.
+The `LinearRegression` model uses **least squares** to estimate the **best parameters**, and further on we will analyze the **analitical solution** to multiple least squares, for now, we can see that the algorithm reached an **optimal** plane and we can plot it on a **3D** graph to see how well it fits the data.
 
 
 ```python
@@ -489,7 +489,7 @@ ax2.view_init(elev=4, azim=114)
     
 
 
-As we can see, the model does a very good job fitting a plane to our data. If we had more variables we could not visualize the model, but the principles would still hold true for higher dimensions.
+As we can see, the model does a very **good** job fitting a plane to our data. If we had more variables we could **not** visualize the model, but the principles would still hold **true** for higher dimensions.
 
 
 ```python
@@ -500,13 +500,13 @@ print(f'SSR for the fitted plane: {SSR(y, yi)}')
     SSR for the fitted plane: 556.9139800676182
     
 
-Since this is a more complex dataset and the data can be dispersed through 3 different axes now, the optimal SSR is much higher than in the simple linear regression model. This is not an issue and the model still represents our data quite well.
+Since this is a more **complex** dataset and the data can be **dispersed** through 3 different axes now, the **optimal SSR** is much **higher** than in the simple linear regression model. This is **not** an issue and the model still **represents** our data quite well.
 
 ## **Assumptions of linear regression**
-Simple and multiple linear regression model have some general facts that are taken as a given for the model to give an accurate result. These facts are known as the assumptions of linear regression and there are four main assumptions listed by statisticians. Let's explore these assumptions one by one.
+Simple and multiple linear regression model have some **general facts** that are taken as a **given** for the model to give an **accurate** result. These facts are known as the **assumptions of linear regression** and there are **four** main assumptions listed by statisticians. Let's explore these assumptions one by one.
 
 ### **Linear relationship**
-For a linear regression model to be effective, there has to be a linear relationship between the variables that are going to be used, and some common ways to see if our model is going to work or not is to visualize the data with a scatter plot, or obtain the correlation between our variables. Let's test this on the simple scatter plot used at the beginning.
+For a linear regression model to be **effective**, there **has** to be a **linear relationship** between the variables that are going to be used, and some common ways to **see** if our model is going to work or not is to **visualize** the data with a **scatter plot**, or obtain the **correlation** between our variables. Let's test this on the simple dataset used at the beginning.
 
 ```python
 x = np.linspace(start = 0, stop = 11, num = 10)
@@ -523,7 +523,7 @@ plt.show()
 ![png](/images/lr_1.png)
     
 
-We can see that visually, the data follows a clear linear relationship. We can also confirm this relationship by obtaining the Pearson correlation coefficient between the variables.
+We can see that **visually**, the data follows a **clear linear relationship**. We can also **confirm** this relationship by obtaining the **Pearson correlation coefficient** between the variables.
 
 
 ```python
@@ -533,20 +533,20 @@ print(f'The correlation between x and y is: {corr[0, 1]:.4f}')
 
     The correlation between x and y is: 0.9797
 
-The correlation coefficient is very close to 1, so we can confirm that our model follows a linear trend and this assumption of linear regression is satisfied. Non-linear relationships are common when working with complex datasets and they cannot be modeled by linear regression.
+The **correlation coefficient** is very close to **1**, so we can confirm that our model follows a **linear trend** and this assumption of linear regression is **satisfied**. **Non-linear** relationships are common when working with **complex** datasets and they **cannot** be modeled by linear regression.
 
 ### **Homoscedasticity**
-This property allows the model to assume that the variance of the errors is constant across the domain of the variables. This means that no matter where we stand in the number line of the independent variable, the error term will be roughly the same. Heteroscedasticity would mean that our errors drift in variance depending on the value of the independent variable and thus, cannot be correctly modeled using linear regression.
+This property allows the model to assume that the **variance** of the **errors** is **constant** across the **domain** of the variables. This means that no matter where we stand in the **number line** of the **independent** variable, the **error** term will be roughly the **same**. **Heteroscedasticity** would mean that our errors **drift** in **variance** depending on the value of the **independent** variable and thus, **cannot** be correctly modeled using linear regression.
 
 ### **Normality**
-Linear regression assumes the error to be normally distributed, meaning that the average, or mean of all the errors should be close to 0, and that our error can overshoot or undershoot the linear prediction in equal probability. 
+Linear regression assumes the **error** to be **normally distributed**, meaning that the average, or **mean** of all the errors should be **close** to **0**, and that our error can **overshoot** or **undershoot** the linear prediction in equal **probability**. 
 
 ### **No multicolinearity**
-An important aspect to consider when analyzing multiple regression models is a problem that arises called multicolinearity. When we think about the individual relationships each independent variable can have with the dependent variable, we consider them separate, but there could be a case where two independent variables are strongly correlated with each other. This is a problem, since the individual relationship one of the variables has to the target cannot be completely reliable, since a change in it can also affect the correlated independent variable and with that, the target in a way that it is not intended to.
+An important aspect to consider when analyzing **multiple regression** models is a problem that arises called **multicolinearity**. When we think about the **individual relationships** each **independent** variable can have with the **dependent** variable, we consider them separate, but there could be a case where **two independent variables** are strongly **correlated** with each other. This is a problem, since the individual **relationship** one of the variables has to the target **cannot** be completely reliable, since a change in it can also **affect** the correlated independent variable and with that, the target in a way that it is not intended to.
 
-An example of this could be two features $x_1$, $x_2$ and a target variable $y$. Assume that $x_1$ is positively correlated to $y$ and $x_2$ is negatively correlated to $y$. When we increase $x_1$, we would expect $y$ to increase, and when increasing $x_2$, $y$ should decrease. Now, if multicolinearity exists, $x_1$ and $x_2$ would be correlated, in this example, assume they are strongly positively correlated. Now, when we increase $x_1$, $y$ should increase, but the increase in $x_1$ causes an increase in $x_2$ because of multicolinearity, which in response, decreases $y$, altering our analysis.
+An example of this could be **two** features $x_1$, $x_2$ and a **target** variable $y$. Assume that $x_1$ is **positively** correlated to $y$ and $x_2$ is **negatively** correlated to $y$. When we **increase** $x_1$, we would expect $y$ to **increase**, and when **increasing** $x_2$, $y$ should **decrease**. Now, if **multicolinearity** exists, $x_1$ and $x_2$ would be **correlated**, in this example, assume they are strongly **positively** correlated. Now, when we **increase** $x_1$, $y$ should **increase**, but the **increase** in $x_1$ causes an **increase** in $x_2$ because of **multicolinearity**, which in response, **decreases** $y$, altering our analysis.
 
-We need to note that although multicolinearity can be present in a linear regression model, it does not mean that the complete model's performance in predicting a variable is bad or wrong, it just means that the individual regression coefficients for the independent variables might be unreliable to use. Let's analyze the multicolinearity in our multiple regression model.
+We need to note that although **multicolinearity** can be present in a linear regression model, it does not mean that the complete model's **performance** in predicting a variable is **bad** or wrong, it just means that the individual regression **coefficients** for the independent variables might be **unreliable** to use. Let's analyze the multicolinearity in our **multiple regression** model.
 
 
 
@@ -567,23 +567,23 @@ print(f'Correlation value between independent variables: {np.corrcoef(X.T)[0, 1]
     Correlation value between independent variables: 0.0548
     
 
-Visually, the relationship is disperse, and this can be confirmed by the low correlation value between the variables, so we don't need to worry about multicolinearity in this dataset.
+Visually, the relationship is **disperse**, and this can be confirmed by the **low correlation** value between the variables, so we don't need to worry about **multicolinearity** in this dataset.
 
 ## **Vectorization**
-One way to simplify least squares calculations is to vectorize our equations. This has two main advantages, it gives more compact equations and it makes the code faster by using optimized vector libraries. When vectorizing our linear regression equation, we get the following:
+One way to simplify **least squares** calculations is to **vectorize** our equations. This has **two** main advantages, it gives more **compact equations** and it makes the code **faster** by using **optimized vector libraries**. When vectorizing our linear regression equation, we get the following:
 $$\hat{y}_i(x^{(i)}) = \sum\limits _{j = 0} ^{d} \beta_j x^{(i)} _{j}$$
 
-where $y_i$ is the predicted dependent variable of sample $i$, $\beta_j$ is the slope parameter of the independent feature $j$ and $x^{(i)}_{j}$ is the value of the input variable $j$ in sample $i$.
+where $y_i$ is the **predicted** dependent variable of sample $i$, $\beta_j$ is the **slope parameter** of the **independent** feature $j$ and $x^{(i)}_{j}$ is the value of the **input variable** $j$ in sample $i$.
 
 Now, let:
 ```math
 \beta = \begin{bmatrix} \beta_0 \\ \beta_1 \\ \vdots \\ \beta_j\end{bmatrix}\textrm{,}\ \  \hat{y} = \begin{bmatrix} \hat{y}_1 \\ \hat{y}_2 \\ \vdots \\ \hat{y}_n \end{bmatrix} \textrm{and}\ \  X = \begin{bmatrix} 1 & x_1^{(1)} & \ldots & x_j ^{(1)} \\ 1 & x_1^{(2)} & \ldots & x_j ^{(2)} \\ \vdots & \vdots & \ddots & \vdots\\ 1 & x_1^{(i)} & \ldots & x_j ^{(i)} \\ \vdots & \vdots & \ddots & \vdots\\ 1 & x_1^{(n)} & \ldots & x_j ^{(n)} \end{bmatrix}
 ```
 <br><br>
-$\beta$ is the parameter vector where $\beta_0$ is the y-intercept and $\beta_j, j > 0$ is the slope or weight parameter of the $j^{th}$ independent variable or feature. $\hat{y}$ is the vector of predicted values of the dependent variable, where each column represents the value at sample $i$ for $n$ samples. $X$ is the matrix of independent variables or design matrix that contains the input values for a sample $i$ for every independent variable $j$. The design matrix often contains a first row full of 1's so that the first term will correspond to the y-intercept when multiplied by $\beta_0$. The sizes of the parameter vector, predicted dependent variable vector and design matrix are $(d+1)\times1$, $n\times1$, and $n\times(d+1)$ respectively, where $n$ is the number of samples and $d$ is the number of independent variables. Using these matrices, the model can be written in vectorized form such that:
+$\beta$ is the **parameter vector** where $\beta_0$ is the **y-intercept** and $\beta_j, j > 0$ is the slope or **weight parameter** of the $j^{th}$ **independent variable** or feature. $\hat{y}$ is the vector of **predicted values** of the dependent variable, where each column represents the value at sample $i$ for $n$ samples. $X$ is the matrix of **independent** variables or **design matrix** that contains the **input values** for a sample $i$ for every **independent** variable $j$. The design matrix often contains a first row **full** of **1's** so that the **first term** will correspond to the **y-intercept** when multiplied by $\beta_0$. The **sizes** of the **parameter vector**, **predicted** dependent variable vector and **design matrix** are $(d+1)\times1$, $n\times1$, and $n\times(d+1)$ respectively, where $n$ is the number of **samples** and $d$ is the number of **independent variables**. Using these matrices, the model can be written in **vectorized form** such that:
 $$\hat{y} = X\beta$$
 
-Now, considering the sum of squared residuals function and the column vector $y$ of observed dependent variable values taken from our dataset such that:
+Now, considering the **sum of squared residuals** function and the column vector $y$ of **observed** dependent variable values taken from our dataset such that:
 
 ```math
 y=\begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_n \end{bmatrix}$$
@@ -594,27 +594,27 @@ $$SSR(\hat{y}, y) = \sum \limits _{i = 0} ^{n} (\hat{y}_i - y_i)^2$$
 $$SSR(\beta) =(X \beta - y)^2$$ 
 $$SSR(\beta) =(X \beta - y)^T (X \beta - y)$$ 
 
-<br><br>Expanding the terms by considering that $(AB)^T = B^T A^T$ and $(A + B)^T = A^T + B^T$:
+<br><br>**Expanding** the terms by considering that $(AB)^T = B^T A^T$ and $(A + B)^T = A^T + B^T$:
 $$SSR(\beta) =(\beta^T X^T - y^T)(X \beta - y)$$
 $$SSR(\beta) =\beta^T X^T X\beta - y^T X\beta - \beta^T X^Ty + y^Ty$$
 $$SSR(\beta) = \beta^T X^T X\beta - 2\beta^T X^Ty + y^Ty$$
 
-<br><br>Now, we derive the vectorized SSR with respect to $\beta$ considering that $\frac{d}{dA}(A^T A) = 2A$ and $\frac{d}{dA}(A^T) = 1$:<br><br>
+<br><br>Now, we **derive** the **vectorized SSR** with respect to $\beta$ considering that $\frac{d}{dA}(A^T A) = 2A$ and $\frac{d}{dA}(A^T) = 1$:<br><br>
 $$\frac{d}{d\beta}(SSR(\beta)) =\frac{d}{d\beta}(\beta^T X^T X\beta - 2\beta^T X^Ty + y^Ty)$$ 
 $$\frac{d}{d\beta}(SSR(\beta)) =\frac{d}{d\beta}(\beta^T X^T X\beta) -2\frac{d}{d\beta}(\beta^T X^Ty) + \frac{d}{d\beta}(y^Ty)$$ 
 $$\frac{d}{d\beta}(SSR(\beta)) =X^T X\frac{d}{d\beta}(\beta^T\beta) -2X^Ty\frac{d}{d\beta}(\beta^T)$$ 
 $$\frac{d}{d\beta}(SSR(\beta)) =X^T X 2\beta -2X^Ty$$ 
 $$\frac{d}{d\beta}(SSR(\beta)) = 2(X^T X\beta - X^Ty)$$ 
 
-<br><br>Equating the derivative to $0$ in order to obtained the least squares value for $\beta$ gives us:
+<br><br>Equating the **derivative** to $0$ in order to obtained the **least squares** value for $\beta$ gives us:
 $$2(X^T X\beta - X^Ty) = 0$$
 $$X^T X\beta - X^Ty = 0$$
 $$X^T X\beta = X^Ty$$
 $$\beta = (X^T X)^{-1} X^Ty$$
 
-<br><br>This is the vectorized form of the least squares formula that solves for the optimal parameter vector $\beta$ as a function of the design matrix $X$ and the independent variable values $y$, both of which are obtained from our base data set.
+<br><br>This is the **vectorized form** of the **least squares** formula that solves for the **optimal parameter vector** $\beta$ as a **function** of the **design matrix** $X$ and the **independent variable values** $y$, both of which are obtained from our base data set.
 
-This formula can be easily computed using NumPy and this is close to what the LinearRegression algorithm in scikit-learn does. The time complexity of this algorithm is roughly $O(n^3)$, and it is the preffered method over other methods like gradient descent for simple linear regression because it is not iterative and we don't need to specify any hyperparameters. The implementation of the formula is shown below and we can notice that the results are exactly the same as the ones obtained with scikit-learn.
+This formula can be **easily computed** using **NumPy** and this is close to what the `LinearRegression` algorithm in **scikit-learn** does. The **time complexity** of this algorithm is roughly $O(n^3)$, and it is the preffered method over other methods like **gradient descent** for simple linear regression because it is **not iterative** and we don't need to specify any **hyperparameters**. The implementation of the formula is shown below and we can notice that the results are **exactly** the same as the ones obtained with **scikit-learn**.
 
 
 ```python
@@ -628,9 +628,9 @@ print(f'Parameter vector obtained with vectorized equations: {beta}')
     Parameter vector obtained with vectorized equations: [2.921 0.046 0.188]
     
 
-We can see that the parameters obtained with the vectorized equation gives us the same parameters obtained through the scikit-learn LinearRegression model, where the model.intercept_ is the first element in our parameter vector and the remaining elements conform the model.coef_ vector.
+We can see that the **parameters** obtained with the **vectorized equation** gives us the same parameters obtained through the **scikit-learn** `LinearRegression` model, where the `model.intercept_` is the first element in our **parameter vector** and the remaining elements conform the `model.coef_` vector.
 
-Additionaly, $(A^TA)^{-1} A^T$ is known as the pseudo-inverse of A, and it is denoted as $A^+$. This means that our entire least squares equation can be expressed as $\beta = X^+ y$, and simplified in code by using NumPy's pseudo-inverse function (np.lingalg.pinv). In the below code, we can see that the resulting matrix is the exact same as the one above.
+Additionaly, $(A^TA)^{-1} A^T$ is known as the **pseudo-inverse** of **A**, and it is denoted as $A^+$. This means that our entire **least squares** equation can be expressed as $\beta = X^+ y$, and simplified in code by using **NumPy's** `np.lingalg.pinv`, which returns the **pseudo-inverse**. In the below code, we can see that the resulting matrix is the exact **same** as the one above.
 
 
 ```python
@@ -641,11 +641,11 @@ print(f'Parameter vector using pseudo-inverse: {beta}')
     Parameter vector using pseudo-inverse: [2.921 0.046 0.188]
     
 
-A problem that can arise when using the vectorized form is the case where $X^TX$ is a singular matrix (not invertible). This can happen when we have more independent variables (features) than samples, or when there is multicolinearity present in our data set. This is another important reason why multicolinearity hinders our model. A solution to the singularity of the matrix is to use the pseudo-inverse, which derives from SVD on our matrix. Calculation using the pseudo-inverse is more robust and it is exactly what scikit-learn uses to solve least squares.
+A **problem** that can arise when using the **vectorized** form is the case where $X^TX$ is a **singular matrix** (not invertible). This can happen when we have more **independent variables** (features) than **samples**, or when there is **multicolinearity** present in our data set. This is another important reason why multicolinearity **hinders** our model. A solution to the **singularity** of the matrix is to use the **pseudo-inverse**, which derives from **SVD** on our matrix. Calculation using the **pseudo-inverse** is more **robust** and it is **exactly** what **scikit-learn** uses to solve **least squares**.
 
 ## **Coefficient of determination $(R^2)$**
 
-An interesting metric that we can calculate is how much of the variance in the data can be explained by our independent variables. This is known as the coefficient of determination, or more commonly known as $R^2$. $R^2$ is obtained by analyzing the variances around the mean of the data, and around the fitted regression line, and seeing how the variance decreases when we fit a line. One of the many benefits of quantifying our model performance with $R^2$ is that it is very intuitive, and it exhibits a linear behavior in the sense that, a value of 0.8 means that our regression is twice as good as one with a value of 0.4. Intuitiveness can also come in the form that $R^2$ can be expressed as a percentage. Another interesting fact about $R^2$ is that it is the square of the Pearson correlation coefficient. Let's see how we can obtain $R^2$ from our datasets.
+An interesting **metric** that we can calculate is how much of the **variance** in the data can be **explained** by our independent variables. This is known as the **coefficient of determination**, or more commonly known as $R^2$. $R^2$ is obtained by analyzing the **variances** around the **mean** of the data, and around the **fitted** regression line, and seeing how the variance **decreases** when we fit a line. One of the many benefits of **quantifying** our model performance with $R^2$ is that it is very **intuitive**, and it exhibits a linear behavior in the sense that, a value of **0.8** means that our regression is **twice as good** as one with a value of **0.4**. Intuitiveness can also come in the form that $R^2$ can be expressed as a **percentage**. Another interesting fact about $R^2$ is that it is the **square** of the **Pearson correlation coefficient**. Let's see how we can obtain $R^2$ from our datasets.
 
 
 ```python
@@ -679,8 +679,8 @@ print(f'Sum of squares around the mean: {ssrm:.4f}\nSum of squares around the fi
     Sum of squares around the fitted line: 28.1333
     
 
-We can see that the sum of squares around the fitted line is much lower than the sum of squares around the mean. $R^2$ is traditionally defined as: 
-$$R^2 = 1 - \frac{\sigma^2_{f}}{\sigma^2_{m}}$$ where $\sigma^2$ is the variance in the data, obtained as $\sigma^2 = \frac{SSR}{n}$ where SSR is the sum of squared residuals around a particular line (when only describing a dataset and not a regression line it would be the mean, this is what variance usually refers to) and $n$ is the number of observations. $\sigma^2_{f}$ is the statistical variance around the fit and $\sigma^2_{m}$ is the variance around the mean. Since both variances use the same number of observations, $R^2$ is defined as: 
+We can see that the sum of squares around the **fitted** line is much **lower** than the sum of squares around the **mean**. $R^2$ is traditionally defined as: 
+$$R^2 = 1 - \frac{\sigma^2_{f}}{\sigma^2_{m}}$$ where $\sigma^2$ is the **variance** in the data, obtained as $\sigma^2 = \frac{SSR}{n}$ where **SSR** is the sum of squared residuals around a particular line (when only describing a dataset and not a regression line it would be the mean, this is what variance usually refers to) and $n$ is the number of **observations**. $\sigma^2_{f}$ is the statistical **variance** around the fit and $\sigma^2_{m}$ is the **variance** around the mean. Since both variances use the **same** number of observations, $R^2$ is defined as: 
 $$R^2 = 1 - \frac{SSR_{f}}{SSR_{m}}$$
 Lets obtain $R^2$ for our fitted line.
 
@@ -693,11 +693,11 @@ print(f'Coefficient of determination (R²) for our regression line: {r2:.4f} or 
     Coefficient of determination (R²) for our regression line: 0.9581 or 95.81%
     
 
-The value for $R^2$ is really close to 1, or 100%. What does this mean? That 95.81% of the variation in the independent variable is explained by taking our dependent variable into account. A lower value of $R^2$ would mean that not as much of the variation is explained with our features, or that our fitted line is not as good in explaining our dependent variable. 
+The value for $R^2$ is really close to **1**, or **100%**. What does this mean? That **95.81%** of the variation in the independent variable is **explained** by taking our dependent variable into **account**. A lower value of $R^2$ would mean that **not** as much of the variation is **explained** with our features, or that our fitted line is **not** as good in explaining our dependent variable. 
 
-$R^2$ for multiple regression gives the same insight as in simple linear regression, but an adjust needs to be made to compensate for the extra parameters. The adjusted $R^2$ also compensates for data with low sample count. $R^2$ The equation for adjusted $R^2$ is: 
+$R^2$ for **multiple regression** gives the same insight as in simple linear regression, but an **adjust** needs to be made to **compensate** for the extra parameters. The adjusted $R^2$ also compensates for data with **low sample count**. $R^2$ The equation for **adjusted** $R^2$ is: 
 $$R^2 = 1- \frac{(1-R^2)(n-1)}{n-p-1}$$
-where $R^2$ is the unadjusted value, $n$ is the number of samples and $p$ is the number of independent variables. Let's see this in action using our adveritising dataset.
+where $R^2$ is the **unadjusted** value, $n$ is the number of **samples** and $p$ is the number of **independent** variables. Let's see this in action using our advertising dataset.
 
 
 ```python
@@ -717,7 +717,7 @@ print(f'Sum of squares around the mean: {ssrm:.4f}\nSum of squares around the fi
     Sum of squares around the fitted plane: 556.9140
     
 
-This means that our regression model explains 89.62% of the variation in the target variable. Let's compare this to a model that predicts sales using only the TV independent variable.
+This means that our **regression model** explains **89.62%** of the variation in the target variable. Let's compare this to a model that predicts sales using **only** the TV independent variable.
 
 
 ```python
@@ -737,16 +737,16 @@ print(f'Sum of squares around the mean: {ssrm:.4f}\nSum of squares around the fi
     Sum of squares around the fitted line: 2102.5306
     
 
-When we only consider a single independent variable, only 61.19% of our variance in the dependent variable is explained by it, compared to the 89.62% that our multiple regression explains. This is a significant improvement and it tells us how useful it is to add this feature to our model. It is important to note that least squares will automatically set the weight of any useless variable to 0, meaning that adding variables to our model will never make the $R^2$ value worse, it will only increase or stay the same, and that is another reason why it is important to adjust $R^2$.
+When we only consider a **single** independent variable, only **61.19%** of our variance in the dependent variable is explained by it, compared to the **89.62%** that our **multiple regression** explains. This is a significant **improvement** and it tells us how useful it is to **add** this feature to our model. It is important to note that **least squares** will automatically set the weight of any **useless** variable to **0**, meaning that adding variables to our model will never make the $R^2$ value **worse**, it will only increase or stay the same, and that is another reason why it is **important** to adjust $R^2$.
 
 ### **p-value for $R^2$**
 
-One important thing we need to consider is how statistically significant our $R^2$ value is. Suppose we only have 2 samples in our dataset and we obtain a regression line. The $R^2$ value would be 1 or 100%, since you can always draw a line that passes through those two points, but it would not be statistically significant since we only have 2 samples and cannot generalize it. To obtain the p-value for $R^2$ we take into account $F$, which is defined as: 
+One important thing we need to consider is how **statistically significant** our $R^2$ value is. Suppose we only have **2** samples in our dataset and we obtain a regression line. The $R^2$ value would be **1** or **100%**, since you can **always** draw a **line** that passes through those two points, but it would not be **statistically significant** since we only have **2** samples and cannot **generalize** it. To obtain the **p-value** for $R^2$ we take into account $F$, which is defined as: 
 $$F = \frac {(SSR_m - SSR_f)/(p_f - p_m) }{SSR_f / (n - p_f)}$$ 
-where $SSR_m$ and $SSR_f$ are the sum of squared residuals around the mean and the fitted line respectively, $p_f$ are the number of parameters in the fitted line, $p_m$ are the number of parameters in the mean and $n$ is the number of samples.
+where $SSR_m$ and $SSR_f$ are the sum of squared residuals around the **mean** and the **fitted line** respectively, $p_f$ are the number of **parameters** in the **fitted line**, $p_m$ are the number of **parameters** in the **mean** and $n$ is the number of **samples**.
 $(p_f - p_m)$ and $(n-p_f)$ are known as the degrees of freedom in the numerator and denominator. 
 
-In order to obtain p-values, we need to calculate the distribution of F for random values with the same degrees of freedom, and then obtain the p-value from the distribution by dividing the more extreme values than the F value for our particular regression over the total values. F-distributions are already characterized by their degrees of freedom and we don't need to calculate them by hand, we can just refer to their values at our specific point and calculate the p-value. Let's obtain the p-value for $R^2$ that we got on the simple regression.
+In order to obtain **p-values**, we need to calculate the **distribution** of **F** for random values with the same **degrees of freedom**, and then obtain the **p-value** from the distribution by dividing the more **extreme** values than the F value for our particular regression over the total values. **F-distributions** are already characterized by their **degrees of freedom** and we don't need to calculate them by hand, we can just refer to their values at our specific point and calculate the **p-value**. Let's obtain the p-value for $R^2$ that we got on the simple regression.
 
 
 ```python
@@ -767,7 +767,7 @@ print(f'F value for our fitted line: {F:.2f}\np-value for R²: {p:.7f}')
     p-value for R²: 0.0000002
     
 
-As a general guideline, if the p-value is less than 0.05, we can say that the value is statistically significant. Since our p-value was much lower than 0.05, our $R^2$ is statistically significant and we can trust that it is not obtained by chance. p-values can also be important for comparing models. Above, we saw the comparison between a multiple and a simple regression line on our advertisement dataset, and we saw that the $R^2$ value had a significant increase when we considered the 2 variables, but how do we know this is not only by chance? We can calculate the p-value with the same equation for F that we saw above, substituting the values of the mean for the values of the univariate fit. The calculation for the p-value between the 2 models is shown below
+As a general guideline, if the p-value is **less** than **0.05**, we can say that the value is **statistically significant**. Since our p-value was **much lower** than **0.05**, our $R^2$ is **statistically significant** and we can trust that it is **not** obtained by **chance**. p-values can also be important for **comparing** models. Above, we saw the comparison between a **multiple** and a **simple regression** line on our advertisement dataset, and we saw that the $R^2$ value had a significant **increase** when we considered the 2 variables, but how do we know this is not only by **chance**? We can calculate the **p-value** with the same equation for **F** that we saw above, substituting the values of the mean for the values of the **univariate** fit. The calculation for the **p-value** between the **2** models is shown below
 
 
 ```python
@@ -786,4 +786,4 @@ print(f'F value for our fitted line: {F:.2f}\np-value for R²: {p:.16f}')
     p-value for R²: 0.0000000000000001
     
 
-The p-value is way, way lower than our 0.05 threshold, so we know that the difference in $R^2$ values for both of our models is statistically significant and since the $R^2$ difference is high, and the p-value is low, we conclude that adding the second variable to our model is worth devoting time and resources to.
+The **p-value** is way, way lower than our **0.05 threshold**, so we know that the difference in $R^2$ values for both of our models is **statistically significant** and since the $R^2$ difference is **high**, and the **p-value** is **low**, we conclude that **adding** the second variable to our **model** is worth devoting **time** and **resources** to.
