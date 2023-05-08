@@ -316,7 +316,7 @@ print(f'scikit-learn\'s estimation for the best line: {lin.coef_[0]:.2f}x + {lin
 
 ## **Multiple regression**
 
-As of now, linear regression is a very simple model that does a good job describing a linear relationship between one independent and one dependent variable. In the real world, we would use this model to predict real values like prices, but in reality, a real continious variable is hardly described by a single feature. Multiple features or independent variables can be considered in order to more accurately describe a dependent variable. This is called multiple regression and it tries to fit a hyperplane of dimension n-1 that describes an n-dimensional dataset. What does this mean? If we have 2 variables that we want to use to predict a third one, we could plot this in a 3D graph and multiple regression would try to fit a plane to the data, instead of a line. This holds true for higher dimensions (independent variables in our data) even if the visualization is impossible to conceptualize.
+As of now, linear regression is a very **simple** model that does a good job describing a linear relationship between **one** independent and **one** dependent variable. In the real world, we would use this model to **predict** real values like prices, but in reality, a real continious variable is **hardly described** by a single feature. **Multiple** features or independent variables can be considered in order to more **accurately** describe a dependent variable. This is called **multiple regression** and it tries to fit a **hyperplane** of dimension **n-1** that describes an **n-dimensional** dataset. What does this mean? If we have **2** variables that we want to use to **predict** a third one, we could plot this in a **3D** graph and multiple regression would try to **fit a plane** to the data, instead of a line. This holds true for **higher dimensions** (independent variables in our data) even if the visualization is **impossible** to conceptualize.
 
 
 ```python
@@ -381,7 +381,7 @@ df.head()
 
 
 
-The following dataset contains information about how effective certain advertisement methods are on the actual sales. We are going to try to predict sales based on the advertisement data. First, we look at the relationship between each feature (independent variable) and the target (dependent variable).
+The following dataset contains information about how **effective** certain advertisement methods are on the actual sales. We are going to try to **predict** sales based on the **advertisement** data. First, we look at the **relationship** between each feature (independent variable) and the target (dependent variable).
 
 
 ```python
@@ -414,7 +414,7 @@ print(f'Correlation values of features with the target:\n{df.corr().iloc[:3,3]}'
     Name: Sales, dtype: float64
     
 
-We can see that TV is highly correlated with sales, while Radio is somewhat correlated and Newspaper is not very correlated. The correlation values confirm this behavior. Since there are only two variables that are somewhat linearly correlated with our data, we will consider only these two variables and drop the third one, since a linear relationship between our target and the last variable wouldn't be very precise. We will curate our dataset and visualize it on a 3D graph.
+We can see that TV is **highly correlated** with sales, while radio is **somewhat correlated** and newspaper is **not** very correlated. The correlation values **confirm** this behavior. Since there are only two variables that are somewhat **linearly correlated** with our data, we will consider **only** these two variables and **drop** the third one, since a linear relationship between our target and the last variable wouldn't be very **precise**. We will curate our dataset and visualize it on a **3D** graph.
 
 
 ```python
